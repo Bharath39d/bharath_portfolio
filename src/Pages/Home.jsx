@@ -1,6 +1,6 @@
 import { Box, Button, Center, Flex, Heading, HStack, Link, Tooltip, Image, Text } from '@chakra-ui/react'
 import { useToast } from '@chakra-ui/react'
-import React, { useRef } from 'react';
+import React, { useState,useRef } from 'react';
 import emailjs from '@emailjs/browser';
 import Aos from 'aos';
 import 'aos/dist/aos.css'
@@ -22,10 +22,19 @@ import Svg3 from '../Components/Svg3';
 import Slider from 'react-slick';
 import Resume from '../Resume/Bharath_Devarasetty_Resume.pdf'
 
+
+
+
 const Home = () => {
 
     const form = useRef();
-    const toast = useToast()
+    // const toast = useToast()
+    const [fullName, setFullName] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [showConfirmation, setShowConfirmation] = useState(false);
 
     const settings = {
         dots: false,
@@ -39,34 +48,109 @@ const Home = () => {
         Aos.init()
     }, [])
 
+
+    const isValidEmail = (value) => {
+        // Basic email validation regex, you may need a more sophisticated one
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(value);
+      };
+
+
+
+    //   const sendEmail = (e) => {
+    //     e.preventDefault();
+
+    //     emailjs.sendForm(process.env.REACT_APP_SERVICE_ID, process.env.REACT_APP_SERVICE_TEMPLATE, form.current, process.env.REACT_APP_SERVICE_SECRET).then((result) => {
+
+    //         toast({
+    //             position: 'top-right',
+    //             title: 'Email Sent ✔',
+    //             description: `Thank You ${form.current.from_name.value.split(" ")[0]} for the message!`,
+    //             status: 'success',
+    //             duration: 5000,
+    //             isClosable: true,
+    //         })
+
+    //         form.current.reset();
+    //     }, 
+    //     (error) => {
+    //         console.log(error.text);
+    //         toast({
+    //             position: 'top-right',
+    //             title: 'Email Not sent.',
+    //             description: "There is some error",
+    //             status: 'warning',
+    //             duration: 5000,
+    //             isClosable: true,
+    //         })
+    //     });;
+
+    // };
+
     const sendEmail = (e) => {
-        e.preventDefault();
+        e.preventDefault(); 
+        // Validation checks
+    if (!fullName || !email || !message) {
+        setErrorMessage('Please fill in all fields.');
+        return;
+      }
+  
+      if (!isValidEmail(email)) {
+        setErrorMessage('Please enter a valid email address.');
+        return;
+      }
+  
+      // Reset the confirmation message
+      setShowConfirmation(false);
+  
+      // Show confirmation message if any of the fields are empty
+      if (!fullName || !email || !message) {
+        setShowConfirmation(true);
+        return;
+      }
+  
+      // Simulated email sending, replace this with your server-side logic
+      const emailData = {
+        to: 'bharathdevarasetty2@gmail.com',
+        subject: 'New Message from Contact Form',
+        body: `
+          Full Name: ${fullName}
+          Email: ${email}
+          Message: ${message}
+        `,
+      };
+  
+      console.log('Simulating sending email:', emailData);
+  
+      // Reset the form fields after sending the email
+      setFullName('');
+      setEmail('');
+      setMessage('');
+      setErrorMessage('');
+  
+      // Show success message
+      setShowSuccessMessage(true);
+  
+      // Hide success message after 3 seconds (adjust as needed)
+      setTimeout(() => {
+        setShowSuccessMessage(false);
+      }, 3000);
 
-        emailjs.sendForm(process.env.REACT_APP_SERVICE_ID, process.env.REACT_APP_SERVICE_TEMPLATE, form.current, process.env.REACT_APP_SERVICE_SECRET).then((result) => {
-
-            toast({
-                position: 'top-right',
-                title: 'Email Sent ✔',
-                description: `Thank You ${form.current.from_name.value.split(" ")[0]} for the message!`,
-                status: 'success',
-                duration: 5000,
-                isClosable: true,
-            })
-
-            form.current.reset();
-        }, 
-        (error) => {
-            console.log(error.text);
-            toast({
-                position: 'top-right',
-                title: 'Email Not sent.',
-                description: "There is some error",
-                status: 'warning',
-                duration: 5000,
-                isClosable: true,
-            })
-        });;
-
+     
+               
+    };
+    
+    // Style for the success message pop-up
+    const successMessageStyle = {
+        position: 'fixed',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        backgroundColor: '#4CAF50',
+        color: 'white',
+        padding: '15px',
+        borderRadius: '5px',
+        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
     };
 
     return (
@@ -79,7 +163,7 @@ const Home = () => {
                             <Heading fontSize="2.3em" className='text' data-text="Bharath Devarasetty"><span className='themeText'>Bharath Devarasetty</span></Heading>
                         </Box>
                         <Text>A software Engineer passionate and experienced in building Web applications and specialized in CI/CD.</Text>
-                        <HStack className='hireMe' onClick={() => { window.open("https://drive.google.com/file/d/1ZOmxCD2PWUJ6dJxpiOoVutqOnks1NoLi/view?usp=sharing", '_blank') }}>
+                        <HStack className='hireMe' onClick={() => { window.open("https://drive.google.com/file/d/1YYfJeGMAvMX-kmX_Ztz05qLIbyIMeNet/view", '_blank') }}>
                             <a href={Resume} download="Bharath_Devarasetty_Resume">
                                 <Button>Resume <GoCloudDownload /></Button>
                             </a>
@@ -234,18 +318,37 @@ const Home = () => {
                     <Box className='form-section'>
                         <form ref={form} onSubmit={sendEmail}>
                             <div className='inputBox'>
-                                <input type="text" name="from_name" required />
+                                {/* <input type="text" name="from_name" required /> */}
+                                <input type="text"  value={fullName} onChange={(e) => setFullName(e.target.value)}/>
                                 <span>Full Name</span>
                             </div>
                             <div className='inputBox'>
-                                <input type="email" name="from_mail" required />
+                                {/* <input type="email" name="from_mail" required /> */}
+                                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
                                 <span>Email</span>
                             </div>
                             <div>
-                                <textarea placeholder='Message 📧' name="message" />
+                                {/* <textarea placeholder='Message 📧' name="message" /> */}
+                                <textarea value={message} placeholder='Message 📧' onChange={(e) => setMessage(e.target.value)}/>
                             </div>
-                            <input type="submit" value="Send Message" />
+                            <input type="submit" onClick={sendEmail} value="Send Message" />
+                            {/* <input type="button" onClick={sendEmail}>  Send Message   </input> */}
                         </form>
+                        {showConfirmation && (
+                                        <p style={{ color: 'orange' }}>
+                                        You missed entering some fields. Do you still want to send the message?
+                                        </p>
+                                    )}
+
+                                    {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+
+                                    {/* Success Message Pop-up */}
+                                    {showSuccessMessage && (
+                                        <div style={successMessageStyle}>
+                                        <p>Message Sent!</p>
+                                        </div>
+                                    )}
+      
                         <Flex className='contact-info'>
                             <HStack>
                                 <SiGmail color="#e34133" />

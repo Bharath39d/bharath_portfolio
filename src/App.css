@@ -1007,7 +1007,7 @@ p::selection {
 
     .skill p {
         font-size: 12px;
-        white-space: nowrap;
+        /* white-space: nowrap; */
     }
 
     .ProjectCard {

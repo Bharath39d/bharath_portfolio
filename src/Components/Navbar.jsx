@@ -36,7 +36,7 @@ const Navbar = () => {
                     <Button><Link href="#projects"><span>Projects</span></Link></Button>
                 </Box>
                 <Box>
-                    <Button onClick={()=>{window.open("https://drive.google.com/file/d/1ZOmxCD2PWUJ6dJxpiOoVutqOnks1NoLi/view?usp=sharing", '_blank')}}><a href={Resume} download="Bharath_Devarasetty_Resume"><span>Resume</span></a></Button>
+                    <Button onClick={()=>{window.open("https://drive.google.com/file/d/1YYfJeGMAvMX-kmX_Ztz05qLIbyIMeNet/view", '_blank')}}><a href={Resume} download="Bharath_Devarasetty_Resume"><span>Resume</span></a></Button>
                 </Box>
                 <Box>
                     <Button><Link href="#contactMe"><span>Contact</span></Link></Button>
