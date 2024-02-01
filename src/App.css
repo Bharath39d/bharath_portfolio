@@ -76,7 +76,7 @@ p::selection {
 
 .logo {
     display: flex;
-    gap: 5px;
+    gap: 30px;
     width: fit-content;
 }
 
@@ -490,10 +490,10 @@ p::selection {
     width: 65%;
 }
 
-.skill>p {
+/* .skill>p {
     font-size: 17px;
     white-space: nowrap;
-}
+} */
 
 
 
@@ -609,7 +609,7 @@ p::selection {
 
 
 /* Github stats */
-#githubStats {
+/* #githubStats {
     background-color: #1a202c;
 }
 
@@ -620,10 +620,10 @@ p::selection {
 #githubStats>h2:first-child {
     margin: 20px 0px;
     letter-spacing: 1px;
-}
+} */
 
 /* Github-stats images */
-.github-stats {
+/* .github-stats {
     margin: 50px;
     gap: 20px;
 }
@@ -639,7 +639,7 @@ p::selection {
 .react-activity-calendar {
     background-color: #1a202c;
     color: #fff;
-}
+} */
 
 
 

@@ -35,7 +35,7 @@ const Home = () => {
     };
 
     useEffect(() => {
-        // * it's from Aos library to to use scroll designing
+        // * it's from Aos library to use scroll designing
         Aos.init()
     }, [])
 
@@ -54,7 +54,8 @@ const Home = () => {
             })
 
             form.current.reset();
-        }, (error) => {
+        }, 
+        (error) => {
             console.log(error.text);
             toast({
                 position: 'top-right',
@@ -77,7 +78,7 @@ const Home = () => {
                         <Box className='content'>
                             <Heading fontSize="2.3em" className='text' data-text="Bharath Devarasetty"><span className='themeText'>Bharath Devarasetty</span></Heading>
                         </Box>
-                        <Text>Am a software Developer passionate and experienced in building Web applications.</Text>
+                        <Text>A software Engineer passionate and experienced in building Web applications and specialized in CI/CD.</Text>
                         <HStack className='hireMe' onClick={() => { window.open("https://drive.google.com/file/d/1ZOmxCD2PWUJ6dJxpiOoVutqOnks1NoLi/view?usp=sharing", '_blank') }}>
                             <a href={Resume} download="Bharath_Devarasetty_Resume">
                                 <Button>Resume <GoCloudDownload /></Button>
@@ -110,7 +111,7 @@ const Home = () => {
                         </Flex>
 
                         <Box>
-                            <Text>Motivated and results-driven professional with two years of hands-on experience as a SharePoint Developer and DevOps Engineer. Passionate about creating captivating user interfaces while optimizing software development through efficient deployment and automation. Proficient in SharePoint Online, React JS, and DevOps, Ensuring the seamless delivery of robust and business-aligned applications.</Text>
+                            <Text>Motivated and results-driven professional with more than 2 years of hands-on experience as a Software Engineer. Passionate about creating captivating user interfaces while optimizing software development through efficient deployment and automation. Proficient in DevOps, SharePoint and React JS. Ensuring the seamless delivery of robust and business-aligned applications.</Text>
                         </Box>
                     </Flex>
                 </Flex>
@@ -124,7 +125,7 @@ const Home = () => {
                 </Heading>
                 <Flex className='skills'>
                     <Flex>
-                        <Heading size="lg">Front<span className='themeText'>end</span></Heading>
+                        <Heading size="lg">Web<span className='themeText'>Development</span></Heading>
                         <Box>
                             {
                                 skills.filter((el) => el.tag === "frontend").map(skill => <Box
@@ -140,10 +141,26 @@ const Home = () => {
                         </Box>
                     </Flex>
                     <Flex>
-                        <Heading size="lg">Back<span className='themeText'>end</span></Heading>
+                        <Heading size="lg">Dev<span className='themeText'>Ops</span></Heading>
                         <Box>
                             {
-                                skills.filter((el) => el.tag === "backend").map(skill => <Box
+                                skills.filter((el) => el.tag === "devops").map(skill => <Box
+                                    key={skill.id}
+                                    className="skill"
+                                    data-aos="zoom-in-up">
+                                    <Box>
+                                        <Image src={skill.icon} />
+                                    </Box>
+                                    <Text>{skill.title}</Text>
+                                </Box>)
+                            }
+                        </Box>
+                    </Flex>
+                    <Flex>
+                        <Heading size="lg">Clo<span className='themeText'>ud</span></Heading>
+                        <Box>
+                            {
+                                skills.filter((el) => el.tag === "cloud").map(skill => <Box
                                     key={skill.id}
                                     className="skill"
                                     data-aos="zoom-in-down">

@@ -18,8 +18,8 @@ const Navbar = () => {
                     <Image src={logo} />
                 </Box>
                 <Box className='name'>
-                    <Heading>Bharath D</Heading>
-                    <Heading>Bharath D</Heading>
+                    <Heading>Bharath.Dev</Heading>
+                    <Heading>Bharath.Dev</Heading>
                 </Box>
             </Box>
             <Box display={["none", 'none', 'none', 'flex']} className="nav-options">
